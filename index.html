@@ -1,0 +1,81 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>PolymerFirebase</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta charset="utf-8">
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="bower_components/platform/platform.js"></script>
+
+
+  <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <!-- <link rel="import" href="bower_components/font-roboto/roboto.html"> -->
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/paper-elements/paper-elements.html">
+  <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+  <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+  <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="bower_components/paper-toast/paper-toast.html">
+
+  <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/firebase-element/firebase-auth.html">
+  <link rel="import" href="bower_components/firebase-element/firebase.html">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body unresolved>
+    <paper-toolbar elevation="10">
+      <span class="flex">Sistema de Administración de Deportes</span>
+    </paper-toolbar>
+
+    <template is="dom-bind" id="app">
+
+      <firebase-auth
+        auto-login
+        redirect
+        location="[[firebaseURL]]"
+        provider="[[firebaseProvider]]"
+        on-error="onFirebaseError"
+        on-login="onFirebaseLogin"></firebase-auth>
+      <paper-toast id="errorToast"></paper-toast>
+
+      <paper-material elevation="1">
+        <form on-submit="addItem">
+          <paper-input value="{{newItemValue}}" placeholder="Nombre del deporte..."></paper-input>
+        </form>
+        <form on-submit="addItem">
+          <paper-input value="{{newItemValueEsp}}" placeholder="Especialidad..."></paper-input>
+        </form>
+        <paper-button on-click="addItem" raised class="botonAgregar"><paper-icon-item>
+            <iron-icon icon="add" item-icon></iron-icon>  Agregar
+          </paper-icon-item>
+        </paper-button>
+        <paper-button on-click="modItem" raised class="botonModficar">
+          <paper-icon-item>
+            <iron-icon icon="update" item-icon></iron-icon>  Modificar
+          </paper-icon-item>
+        </paper-button>
+        
+      </paper-material>
+
+      <paper-material elevation="1">
+        <template is="dom-repeat" items="{{items}}">
+          <div>
+            <paper-icon-button icon="delete" on-click="deleteItem"></paper-icon-button>
+            
+            <paper-checkbox on-change="toggleItem" checked="{{item.done}}"><strong>Deporte: </strong> [[item.text]] <strong>Especialidad: </strong> [[item.textEsp]]</paper-checkbox>
+          </div>
+      </paper-material>
+      </template>
+    </template>
+  <script src="main.js"></script>
+</body>
+</html>

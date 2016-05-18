@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>PolymerFirebaseCodelab</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta charset="utf-8">
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+  <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <!-- <link rel="import" href="bower_components/font-roboto/roboto.html"> -->
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+  <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+  <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="bower_components/paper-toast/paper-toast.html">
+  
+  <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/firebase-element/firebase-auth.html">
+  <link rel="import" href="bower_components/firebase-element/firebase.html">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body unresolved>
+    
+    <template is="dom-bind" id="app">
+      
+      <firebase-auth
+        auto-login
+        redirect
+        location="[[firebaseURL]]"
+        provider="[[firebaseProvider]]"
+        on-error="onFirebaseError"
+        on-login="onFirebaseLogin"></firebase-auth>
+      <paper-toast id="errorToast"></paper-toast>
+      
+      <paper-material elevation="1">
+        <form on-submit="addItem">
+          <paper-input value="{{newItemValue}}"
+            placeholder="Agregue su nombre aquí..."></paper-input>
+        </form>
+        <form on-submit="addItem">
+          <paper-input value="{{newItemValueApellido}}"
+            placeholder="Agregue su apellido aquí..."></paper-input>
+        </form>
+        <paper-button on-click="addItem" raised class="botonAgregar">Agregar</paper-button>
+      </paper-material>
+      </template>
+    </template>
+  <script src="main.js"></script>
+</body>
+</html>
